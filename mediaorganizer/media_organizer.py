@@ -21,10 +21,15 @@ class MediaOrganizer:
         for root, dirs, files in os.walk(self.input_path):
             for file in files:
                 absolute_file_path = os.path.join(root, file)
-                relative_file_path = os.path.join(root, file).replace(self.input_path, "").lstrip(os.path.sep)
-                self.process_file(absolute_file_path, relative_file_path)
 
-    def process_file(self, absolute_file_path: str, relative_file_path: str):
+                try:
+                    self.process_file(absolute_file_path)
+                except Exception as e:
+                    print(f"Error processing {absolute_file_path}: {e}")
+
+    def process_file(self, absolute_file_path: str):
+        relative_file_path = absolute_file_path.replace(self.input_path, "").lstrip(os.path.sep)
+
         if is_image(absolute_file_path):
             print(f"\nProcessing image {absolute_file_path}...")
             file_year = str(self._get_file_year(absolute_file_path))
