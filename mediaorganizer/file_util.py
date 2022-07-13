@@ -169,6 +169,10 @@ VIDEO_EXTENSIONS = frozenset(
     ]
 )
 
+FILE_PATH_PARTS_TO_IGNORE = frozenset(
+    [".stversions"]
+)
+
 
 def is_image(file_path: str) -> bool:
     for image_extension in IMAGE_EXTENSIONS:
@@ -180,5 +184,12 @@ def is_image(file_path: str) -> bool:
 def is_video(file_path: str) -> bool:
     for video_extension in VIDEO_EXTENSIONS:
         if file_path.lower().endswith(video_extension):
+            return True
+    return False
+
+
+def should_ignore_file(file_path: str) -> bool:
+    for file_path_part in FILE_PATH_PARTS_TO_IGNORE:
+        if file_path_part in file_path.lower():
             return True
     return False

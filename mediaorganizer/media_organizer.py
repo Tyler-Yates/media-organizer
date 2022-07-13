@@ -4,7 +4,7 @@ from datetime import datetime
 
 import exifread
 
-from mediaorganizer.file_util import is_image, is_video
+from mediaorganizer.file_util import is_image, is_video, should_ignore_file
 
 
 class MediaOrganizer:
@@ -21,6 +21,9 @@ class MediaOrganizer:
         for root, dirs, files in os.walk(self.input_path):
             for file in files:
                 absolute_file_path = os.path.join(root, file)
+
+                if should_ignore_file(absolute_file_path):
+                    continue
 
                 try:
                     self.process_file(absolute_file_path)
