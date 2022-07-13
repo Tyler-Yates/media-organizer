@@ -172,13 +172,13 @@ VIDEO_EXTENSIONS = frozenset(
 
 def is_image(file_path: str) -> bool:
     for image_extension in IMAGE_EXTENSIONS:
-        if file_path.endswith(image_extension):
+        if file_path.lower().endswith(image_extension):
             return True
     return False
 
 
 def is_video(file_path: str) -> bool:
     for video_extension in VIDEO_EXTENSIONS:
-        if file_path.endswith(video_extension):
+        if file_path.lower().endswith(video_extension):
             return True
     return False
