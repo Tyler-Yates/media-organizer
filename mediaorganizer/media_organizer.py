@@ -42,13 +42,13 @@ class MediaOrganizer:
             else:
                 new_file_path = os.path.join(self.pictures_output_path, str(file_year), relative_file_path)
 
+            if os.path.exists(new_file_path):
+                print(f"File {new_file_path} already exists. Skipping.")
+                return
+
             if self.dry_run:
                 print(f"Would move file to {new_file_path}")
             else:
-                if os.path.exists(new_file_path):
-                    print(f"File {new_file_path} already exists. Skipping.")
-                    return
-
                 file_directory = os.path.dirname(new_file_path)
                 os.makedirs(file_directory, exist_ok=True)
 
