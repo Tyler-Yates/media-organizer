@@ -47,6 +47,7 @@ class MediaOrganizer:
             else:
                 if os.path.exists(new_file_path):
                     print(f"File {new_file_path} already exists. Skipping.")
+                    return
 
                 file_directory = os.path.dirname(new_file_path)
                 os.makedirs(file_directory, exist_ok=True)
